@@ -10,6 +10,8 @@ Data Import
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
+    ## Warning: 程辑包'haven'是用R版本4.2.2 来建造的
+
 ## Data Import: CSVs
 
 Let’s import data using the `readr` package.
@@ -157,3 +159,34 @@ read_csv("./data/FAS_litters.csv")
     ## #   ²​`GD of Birth`, ³​`Pups born alive`, ⁴​`Pups dead @ birth`, ⁵​`Pups survive`
 
 ## Other file formats
+
+We need to read in an excel spreadsheet …
+
+``` r
+mlb_df = read_excel("./data/mlb11.xlsx")
+```
+
+``` r
+View(mlb_df)
+```
+
+``` r
+lotR_words_df =
+  read_excel(
+  "./data/LotR_Words.xlsx",
+  range = "B3:D6")
+```
+
+## Still more formats …
+
+Read in a SAS dataset
+
+``` r
+pulse_df = read_sas("./data/public_pulse_data.sas7bdat")
+```
+
+## Data export
+
+``` r
+write_csv(lotR_words_df, file = "results/lotR_words_df.csv")
+```
