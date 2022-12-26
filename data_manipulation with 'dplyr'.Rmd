@@ -1,0 +1,54 @@
+---
+title: "data_manipulation with 'dplyr'"
+output: github_document
+date: "2022-12-25"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+```
+
+
+```{r}
+pups_data = read_csv("./data/FAS_pups.csv")
+pups_data = janitor::clean_names(pups_data)
+
+pups_data = filter(pups_data, sex == 2, pd_walk < 11)
+pups_data
+
+```
+
+
+
+
+
+
+
+```{r}
+litters_data_raw = 
+  read_csv("./data/FAS_litters.csv") %>% 
+  janitor::clean_names() %>%
+  select(-pups_survive) %>%
+  mutate(wt_gain = gd18_weight - gd0_weight,
+    group = str_to_lower(group)) %>%
+  drop_na(wt_gain)
+  
+litters_data_raw
+
+```
+
+```{r}
+loads_pups_data = 
+  read_csv("./data/FAS_pups.csv") %>%
+  janitor::clean_names() %>%
+  filter(sex == 1) %>%
+  select(-pd_ears) %>%
+  mutate(pd_pivot_is_7 = pd_pivot >= 7)
+
+loads_pups_data
+```
+
+
+
